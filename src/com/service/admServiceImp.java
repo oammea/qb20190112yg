@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.*;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -38,6 +40,15 @@ public class admServiceImp implements InterfaceAdmService{
 		InterfaceAdmDao iad = ac.getBean(InterfaceAdmDao.class);
 		ac.close();
 		return iad.findByName(e_name);
+	}
+
+	@Override
+	public List<Map> findList() {
+		// TODO Auto-generated method stub
+		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+		InterfaceAdmDao iad = ac.getBean(InterfaceAdmDao.class);
+		ac.close();
+		return iad.findList();
 	}
 	
 }

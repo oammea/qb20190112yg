@@ -21,6 +21,10 @@ public class Test {
 		// TODO Auto-generated method stub
 		Adm adm=new Adm(null, "admin", "admin");
 		System.out.println(ias.findByNameAndPWD(adm).toString());
-		
+	}
+	@org.junit.Test
+	public void fun2() {
+		// TODO Auto-generated method stub
+		System.out.println(ias.findList());
 	}
 }

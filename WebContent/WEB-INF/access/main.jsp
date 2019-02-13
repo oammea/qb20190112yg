@@ -9,7 +9,7 @@
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$('#tb2').hide();
+		$('.tb2').hide();
 		$('#sub').attr("enabled", true)
 	})
 
@@ -18,11 +18,11 @@
 	function add(){
 		
 		$('#tb1').show();
-		$('#tb2').hide();
+		$('.tb2').hide();
 	}
 	function manage(){
 		$('#tb1').hide();
-		$('#tb2').show();
+		$('.tb2').show();
 	}
 </script>
 <script type="text/javascript">
@@ -75,7 +75,29 @@ $(function(){
 				<tr><td>职位<td><input name="e_job"></tr>
 				<tr><td></td><td><input type="submit" id="sub"></tr>
 			</table></li>
-			<li><table id="tb2">
+			<li><table class="tb2">
+					<form action="gobuy.action?pageSize=10&u_id=${u.u_id }" id="form">
+						<input type="hidden" id="currentPage" name="currentPage" value="${p.currentPage }">
+						<input type="hidden" name="pageSize" value="${p.pageSize }">
+						<input type="hidden" name="u_id" value="${u.u_id }">
+						<div class="tb2">员工姓名 <input type="text" name="g_name" value="${p.g_name }">
+							年龄<select name="e_age">
+							<c:forEach begin="1" end="200" step="1" var="i">
+								<c:choose>
+									<c:when test="${i==18 }">
+										<option value=${i } selected="selected">${i }
+									</c:when>
+									<c:otherwise>
+										<option value=${i } >${i }
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							</select>
+							<input type="submit" value="查询">
+							<input type="button" value="上一页" onclick="$('#currentPage').val('${p.currentPage-1}');$('#form').submit()">
+							<input type="button" value="下一页" onclick="$('#currentPage').val('${p.currentPage+1}');$('#form').submit()">
+						</div>
+					</form>
 				<tr><td>id<td>员工姓名<td>员工性别<td>身份证号<td>年龄<td></tr>
 				
 			</table></li>

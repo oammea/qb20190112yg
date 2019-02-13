@@ -14,7 +14,6 @@ import com.bean.Adm;
 import com.bean.Emp;
 
 import com.service.InterfaceAdmService;
-
 import net.sf.json.JSONObject;
 
 @Controller
@@ -26,6 +25,7 @@ public class Controllers {
 		ModelAndView mad= new ModelAndView();
 		System.out.println(a.toString());
 		if(ias.findByNameAndPWD(a)!=null){
+			mad.addObject("list",ias.findList());
 			mad.setViewName("WEB-INF/access/main.jsp");
 		}else{
 			mad.addObject("fail",true);
@@ -52,7 +52,6 @@ public class Controllers {
 		JSONObject jsonObject=new JSONObject();
 		if(emp!=null) {
 			jsonObject.put("msg", "用户名已存在");
-
 		}else {
 			jsonObject.put("msg", "用户名可以使用");
 		}

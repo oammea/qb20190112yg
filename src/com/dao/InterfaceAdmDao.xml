@@ -14,4 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findByName" parameterType="String" resultType="Emp">
 		select * from emp where e_name =#{e_name}
 	</select>
+	<select id="findList" resultType="java.util.Map">
+		select * from emp
+	</select>
 </mapper>
