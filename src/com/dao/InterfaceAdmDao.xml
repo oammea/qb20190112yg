@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.InterfaceAdmDao">
+	<select id="findByNameAndPWD" parameterType="Adm" resultType="Adm">
+		select * from adm where adm_name =#{adm_name} and adm_password = #{adm_password}
+	</select>
+	
+	<insert id="addEmp" parameterType="Emp">
+	<!-- e_id e_name e_sex e_idcard e_age e_dept e_job -->
+		insert into emp values(#{e_id},#{e_name},#{e_sex},#{e_idcard},#{e_age},#{e_dept},#{e_job})
+	</insert>
+</mapper>
