@@ -1,6 +1,10 @@
 package com.controller;
 
+import java.io.IOException;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bean.Adm;
 import com.bean.Emp;
+
 import com.service.InterfaceAdmService;
+
+import net.sf.json.JSONObject;
 
 @Controller
 public class Controllers {
@@ -34,5 +41,27 @@ public class Controllers {
 		mad.addObject("add",true);
 		mad.setViewName("WEB-INF/access/main.jsp");
 		return mad;
-	}ajaxname.action
+	}
+	@RequestMapping(value="/ajaxname.action")
+	public void ajaxname(HttpServletRequest request,HttpServletResponse response) {
+		String parameter = request.getParameter("e_name");
+		System.out.println("e_name:"+parameter);
+		Emp emp = ias.findByName(parameter);
+		System.out.println(emp);
+		response.setContentType("application/x-json;charset=utf-8");
+		JSONObject jsonObject=new JSONObject();
+		if(emp!=null) {
+			jsonObject.put("msg", "用户名已存在");
+
+		}else {
+			jsonObject.put("msg", "用户名可以使用");
+		}
+		try {
+			jsonObject.write(response.getWriter());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }

@@ -10,6 +10,7 @@
 <script type="text/javascript">
 	$(function(){
 		$('#tb2').hide();
+		$('#sub').attr("enabled", true)
 	})
 
 </script>
@@ -27,7 +28,6 @@
 <script type="text/javascript">
 $(function(){
 	$('#e_name').blur(function(){
-		alert('1');
 		$.ajax({
 			type: "POST",
 			url: "ajaxname.action",
@@ -36,7 +36,13 @@ $(function(){
 			},
 			datatype:"json",
 			success: function(data){
-				alert(data.msg);
+				if(data.msg=="用户名可以使用"){
+				$('#err').html('<font color="green">'+data.msg+'</font>');	
+				$('#sub').attr("disabled", false)
+				}else{
+				$('#err').html('<font color="red">'+data.msg+'</font>');	
+				$('#sub').attr("disabled", true)
+				}
 			}
 		})
 	})
@@ -50,8 +56,8 @@ $(function(){
 		<ol style="list-style-type: none">
 			<li><table id="tb1">
 				<!-- e_name e_sex e_idcard e_age e_dept e_job -->
-				<tr><td>员工姓名<td><input id="e_name" name="e_name"></tr>
-				<tr><td>员工性别<td><label for="r1">nan</label><input id="r1" type="radio" name="e_sex"><label for="r2">nv</label><input id="r2" type="radio" name="e_sex" value="女"></tr>
+				<tr><td>员工姓名<td><input id="e_name" name="e_name"><span id="err"></span></tr>
+				<tr><td>员工性别<td><label for="r1">nan</label><input id="r1" type="radio" name="e_sex" value="男"><label for="r2">nv</label><input id="r2" type="radio" name="e_sex" value="女"></tr>
 				<tr><td>身份证号<td><input name="e_idcard"></tr>
 				<tr><td>年龄<td><select name="e_age">
 				<c:forEach begin="1" end="200" step="1" var="i">
@@ -67,11 +73,12 @@ $(function(){
 				</select></tr>
 				<tr><td>部门<td><input name="e_dept"></tr>
 				<tr><td>职位<td><input name="e_job"></tr>
-				<tr><td></td><td><input type="submit"></tr>
+				<tr><td></td><td><input type="submit" id="sub"></tr>
 			</table></li>
 			<li><table id="tb2">
-				<td>a
-			</table><li>
+				<tr><td>id<td>员工姓名<td>员工性别<td>身份证号<td>年龄<td></tr>
+				
+			</table></li>
 		</ol>
 	</form>
 </body>

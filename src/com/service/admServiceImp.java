@@ -30,5 +30,14 @@ public class admServiceImp implements InterfaceAdmService{
 		ac.close();
 		return iad.addEmp(e);
 	}
+
+	@Override
+	public Emp findByName(String e_name) {
+		// TODO Auto-generated method stub
+		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+		InterfaceAdmDao iad = ac.getBean(InterfaceAdmDao.class);
+		ac.close();
+		return iad.findByName(e_name);
+	}
 	
 }
