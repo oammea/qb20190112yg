@@ -1,6 +1,8 @@
 package com.controller;
 
+import java.util.*;
 import java.io.IOException;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +27,9 @@ public class Controllers {
 		ModelAndView mad= new ModelAndView();
 		System.out.println(a.toString());
 		if(ias.findByNameAndPWD(a)!=null){
-			mad.addObject("list",ias.findList());
+			mad.addObject("currentPage", 1);
+			mad.addObject("pageSize", 2);
+			mad.addObject("list",ias.findListByPg(1, 2));
 			mad.setViewName("WEB-INF/access/main.jsp");
 		}else{
 			mad.addObject("fail",true);
@@ -67,9 +71,17 @@ public class Controllers {
 	public ModelAndView pg(Emp e,Integer currentPage,Integer pageSize) {
 		ModelAndView mad= new ModelAndView();
 		System.out.println(e.toString());
-		ias.addEmp(e);
-		mad.addObject("add",true);
-		mad.addObject("list",ias.findList());
+		if(currentPage<1){
+			currentPage=1;
+		}
+		List<Map> list=ias.findListByPg(currentPage,pageSize);
+		if(list.size()<1){
+			currentPage--;
+			list=ias.findListByPg(currentPage,pageSize);
+		}
+		mad.addObject("currentPage", currentPage);
+		mad.addObject("pageSize", pageSize);
+		mad.addObject("list",list);
 		mad.setViewName("WEB-INF/access/main.jsp");
 		return mad;
 	}

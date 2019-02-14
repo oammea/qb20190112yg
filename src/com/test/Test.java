@@ -25,6 +25,6 @@ public class Test {
 	@org.junit.Test
 	public void fun2() {
 		// TODO Auto-generated method stub
-		System.out.println(ias.findList());
+		System.out.println(ias.findListByPg(2, 2));
 	}
 }

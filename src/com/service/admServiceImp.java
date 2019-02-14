@@ -50,5 +50,27 @@ public class admServiceImp implements InterfaceAdmService{
 		ac.close();
 		return iad.findList();
 	}
+
+	@Override
+	public List<Map> findListByPg(Integer currentPage, Integer pageSize) {
+		// TODO Auto-generated method stub
+		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+		InterfaceAdmDao iad = ac.getBean(InterfaceAdmDao.class);
+		ac.close();
+		return iad.findListByPg(getfirst(currentPage,pageSize),getlast(currentPage,pageSize));
+	}
+
+	private Integer getlast(Integer currentPage, Integer pageSize) {
+		// TODO Auto-generated method stub
+		System.out.println("last:"+currentPage*pageSize);
+		return currentPage*pageSize;
+	}
+
+	private Integer getfirst(Integer currentPage, Integer pageSize) {
+		// TODO Auto-generated method stub
+		System.out.println("first:"+(currentPage-1)*pageSize+1);
+		return (currentPage-1)*pageSize+1;
+	}
+
 	
 }

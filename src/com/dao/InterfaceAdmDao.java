@@ -10,4 +10,5 @@ public interface InterfaceAdmDao {
 	public Integer addEmp(Emp e);
 	public Emp findByName(String e_name);
 	public List<Map> findList();
+	public List<Map> findListByPg(Integer getfirst, Integer getlast);
 }

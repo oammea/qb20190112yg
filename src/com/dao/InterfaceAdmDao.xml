@@ -17,4 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findList" resultType="java.util.Map">
 		select * from emp
 	</select>
+	<select id="findListByPg" resultType="java.util.Map">
+		select * from (SELECT (@rowno := @rowno +1) as rowno,u.* from emp u,(Select (@rowno :=0) ) b)e where rowno>=#{0} and #{1}>=rowno
+	</select>
 </mapper>
