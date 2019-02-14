@@ -39,6 +39,7 @@ public class Controllers {
 		System.out.println(e.toString());
 		ias.addEmp(e);
 		mad.addObject("add",true);
+		mad.addObject("list",ias.findList());
 		mad.setViewName("WEB-INF/access/main.jsp");
 		return mad;
 	}
@@ -61,6 +62,15 @@ public class Controllers {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	}
+	@RequestMapping(value="pg.action")
+	public ModelAndView pg(Emp e,Integer currentPage,Integer pageSize) {
+		ModelAndView mad= new ModelAndView();
+		System.out.println(e.toString());
+		ias.addEmp(e);
+		mad.addObject("add",true);
+		mad.addObject("list",ias.findList());
+		mad.setViewName("WEB-INF/access/main.jsp");
+		return mad;
 	}
 }
